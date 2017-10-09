@@ -128,10 +128,11 @@ class ImportFromExcelController < ApplicationController
   end
 
   def open_spreadsheet(file)
+    # binding.pry
     case File.extname(file.original_filename)    
     when '.ods' then Roo::OpenOffice.new(file.path, nil, :ignore)
-    when '.xls' then Roo::Excel.new(file.path, nil, :ignore)
-    when '.xlsx' then Roo::Excelx.new(file.path, nil, :ignore)
+    when '.xls' then Roo::Excel.new(file.path)
+    when '.xlsx' then Roo::Excelx.new(file.path)
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
